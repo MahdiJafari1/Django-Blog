@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}this post title{% endblock title %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'blog/post-details.css' %}">
+{% endblock css %}
+
+{% block content %}
+<section id="summary">
+    <h2>Post title</h2>
+    <article>
+        <img src="{% static 'blog/images/mahdi_1.jpg' %}" alt="post image">
+        <address>by Mahdi  </address>
+        <div>
+            last updated on <time>July 10th</time>
+        </div>
+    </article>
+</section>
+
+<main>
+    <p>{% lorem 4 p random %}</p>
+</main>
+{% endblock content %}

@@ -3,38 +3,23 @@
 {% block title %}Home{% endblock title %}
 
 {% block css %}
+<link rel="stylesheet" href="{% static 'blog/post.css' %}">
 <link rel="stylesheet" href="{% static 'blog/index.css' %}">
 {% endblock css %}
 
 {% block content %}
-
-    <header id="main-navigation">
-        <h1><a href="">Mahdi blog</a></h1>
-        <nav><a href="">All posts</a></nav>
-    </header>
-
     <section id="welcome">
         <header>
-            <img src="" alt="Mahdi">
+            <img src="{% static 'blog/images/mahdi_1.jpg' %}" alt="Mahdi">
             <h2>MAHDI BLOG</h2>
         </header>
         <p>{% lorem 10 w random %}</p>
     </section>
 
-    <section id="latest-posts">
+    <section id="latest_posts">
         <h2>My Latest Thoughts</h2>
         <ul>
-            <li>
-                <article class="post">
-                    <a href="">
-                        <img src="" alt="">
-                    </a>
-                    <div class="post__content">
-                        <h3>{% lorem 3 w random %}</h3>
-                        <p>{% lorem 1 b random %}</p>
-                    </div>
-                </article>
-            </li>
+            {% include "blog/includes/post.html" %}
         </ul>
     </section>
 

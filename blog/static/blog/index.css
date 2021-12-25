@@ -33,20 +33,30 @@
   font-size: 1.5rem;
 }
 
-#latest-posts {
-  background-color: white;
+#latest_posts {
+  background-color: #eee;
   padding: 2rem;
   border-radius: 12px;
   width: 60rem;
   margin: -6rem auto 2rem auto;
   box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.4);
-}
-
-#latest-posts h2 {
   text-align: center;
 }
 
-#latest-posts ul {
+#latest_posts img {
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+#latest_posts h2 {
+  text-align: center;
+}
+
+#latest_posts ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -54,7 +64,7 @@
   gap: 1rem;
 }
 
-#latest-posts li {
+#latest_posts li {
   flex: 1;
 }
 

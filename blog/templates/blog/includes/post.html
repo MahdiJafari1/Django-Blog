@@ -1,0 +1,14 @@
+{% load static %}
+
+<li>
+    <article class="post">
+        <a href="{% url 'post_details' 'post-1' %}">
+            <img src="{% static 'blog/images/mahdi_1.jpg' %}" alt="blog image">
+            
+            <div class="post__content">
+                <h3>{{ post.title }}</h3>
+                <p>{% lorem 1 b random %}</p>
+            </div>
+        </a>
+    </article>
+</li>
