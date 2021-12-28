@@ -7,17 +7,17 @@
 
 {% block content %}
 <section id="summary">
-    <h2>Post title</h2>
+    <h2>{{ post.title }}</h2>
     <article>
-        <img src="{% static 'blog/images/mahdi_1.jpg' %}" alt="post image">
-        <address>by Mahdi  </address>
+        <img src="{{ post.image }}" alt="{{ post.title }}">
+        <address>by {{ post.author }}</address>
         <div>
-            last updated on <time>July 10th</time>
+            last updated on <time>{{ post.date }}</time>
         </div>
     </article>
 </section>
 
 <main>
-    <p>{% lorem 4 p random %}</p>
+    <p>{{ post.content }}</p>
 </main>
 {% endblock content %}
