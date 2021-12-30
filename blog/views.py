@@ -1,18 +1,29 @@
-from django.shortcuts import get_object_or_404, render
 from datetime import date
+from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from .models import Post, Tag, Author
+from django.shortcuts import get_object_or_404, render
 
-def home(request):
-    latest_posts = Post.objects.order_by('-date')[:3]
-    return render(request, 'blog/home.html', {
-        'posts': latest_posts
-    })
+class HomeView(TemplateView):
+    template_name = "blog/home.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["posts"] = Post.objects.order_by('-date')[:3]
+        return context
+    
+class PostList(ListView):
+    model = Post
+    context_object_name = 'posts'
+    template_name='blog/posts.html'
 
-def posts(request):
-    return render(request, 'blog/posts.html')
 
-def post_details(request, slug):
-    post = get_object_or_404(Post, slug=slug)
-    return render(request, 'blog/post_details.html', {
-        'post': post
-    })
+class PostDetail(DetailView):
+    model = Post
+    template_name='blog/post_details.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["slug"] = self.kwargs['slug']
+        return context

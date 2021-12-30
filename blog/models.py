@@ -21,7 +21,7 @@ class Post(models.Model):
 
     title = models.CharField(max_length=100)
     excerpt = models.TextField()
-    image = models.ImageField(upload_to='blog/static/blog/images/')
+    image = models.ImageField(upload_to='posts')
     date = models.DateField(auto_now=True, )
     slug = models.SlugField(max_length=100, unique=True, db_index=True)
     content = models.TextField(max_length=10000, validators=[MinLengthValidator(10)])
