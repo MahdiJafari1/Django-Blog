@@ -1,4 +1,4 @@
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
 from django.views.generic.list import ListView
 from .models import Comment, Post, Tag, Author
@@ -35,14 +35,20 @@ class PostDetailsView(View):
         comment = CommentForm(request.POST)
         post = Post.objects.get(slug=slug)
         if comment.is_valid():
-            comment.save(commit=False)
+            comment = comment.save(commit=False)
             comment.post = post
             comment.save()
             return HttpResponseRedirect(reverse('post_details', args=[slug]))
-        
         context = {
             'post': post,
             'tags': post.tags.all(),
             'form': CommentForm()
         }
         return render(request, 'blog/post_details.html', context)
+
+class SavedPostView(View):
+    def get(self, request, *args, **kwargs):
+        return HttpResponse('GET request!')
+
+    def post(self, request, *args, **kwargs):
+        return HttpResponse('POST request!')

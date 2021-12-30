@@ -17,6 +17,9 @@
 
 <section id="summary">
     <h2>{{ post.title|title }}</h2>
+    {% for tag in tags %}
+        <span class="tag">{{ tag }}</span>
+    {% endfor %}
     <article>
         <img src="{{ post.image.url }}" alt="{{ post.title|title }}">
         <address>
