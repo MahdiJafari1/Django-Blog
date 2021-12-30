@@ -1,23 +1,63 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}this post title{% endblock title %}
+{% block title %}{{ post.title|title }}{% endblock title %}
 {% block css %}
-    <link rel="stylesheet" href="{% static 'blog/post-details.css' %}">
+    <link rel="stylesheet" href="{% static '/blog/post_details.css' %}">
 {% endblock css %}
 
 {% block content %}
+
+{% if form.errors %}
+    <div id="alert">
+        <p>Saving the comment failed!</p>
+        <p>Please check the form comment below and fix the errors.</p>
+        <a href="#comment-form">Fix!</a>
+    </div>
+{% endif %}
+
 <section id="summary">
-    <h2>{{ post.title }}</h2>
+    <h2>{{ post.title|title }}</h2>
     <article>
-        <img src="{{ post.image.url }}" alt="{{ post.title }}">
-        <address>by {{ post.author }}</address>
+        <img src="{{ post.image.url }}" alt="{{ post.title|title }}">
+        <address>
+            By 
+            <a href="mailto:{{ post.author.email }}">
+                {{ post.author|title }}
+            </a>
+        </address>
         <div>
-            last updated on <time>{{ post.date }}</time>
+            Last updated on <time>{{ post.date|date:"d M Y" }}</time>
         </div>
     </article>
 </section>
 
 <main>
-    <p>{{ post.content }}</p>
+    <p>{{ post.content|linebreaks }}</p>
 </main>
+
+<section id="comments">
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <h2>{{ comment.user_name }}</h2>
+                <p>{{ comment.text|linebreaks }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section id="comment-form">
+    <h2>Your Comment</h2>
+    <form action="{% url 'post_details' post.slug %}" method="post">
+        {% csrf_token %}
+        {% for form_field in form %}
+            <div class="form-control {% if form_field.errors %}invalid{% endif %}">
+                {{ form_field.label_tag }}
+                {{ form_field }}
+                {{ form_field.errors }}
+            </div>
+        {% endfor %}
+        <button>Save Comment</button>
+    </form>
+</section>
 {% endblock content %}

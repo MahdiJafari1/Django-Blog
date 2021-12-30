@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Author, Post, Tag
+from .models import Author, Comment, Post, Tag
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
@@ -10,7 +10,7 @@ class AuthorAdmin(admin.ModelAdmin):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'image', 'date',)
-    list_filter = ('tag', 'date', 'author',)
+    list_filter = ('tags', 'date', 'author',)
     prepopulated_fields = {'slug': ('title',)}
 
 @admin.register(Tag)
@@ -19,3 +19,8 @@ class TagAdmin(admin.ModelAdmin):
     list_filter = ('caption',)
 
 
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user_name', 'user_email', 'text',)
+    list_filter = ('user_name',)
+    
