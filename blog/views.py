@@ -46,9 +46,9 @@ class PostDetailsView(View):
         }
         return render(request, 'blog/post_details.html', context)
 
-class SavedPostView(View):
+class StoredPostView(View):
     def get(self, request, *args, **kwargs):
-        return HttpResponse('GET request!')
+       return render(request, 'blog/stored_posts.html')
 
     def post(self, request, *args, **kwargs):
         return HttpResponse('POST request!')

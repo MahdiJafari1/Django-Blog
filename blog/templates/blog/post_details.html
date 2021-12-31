@@ -20,6 +20,12 @@
     {% for tag in tags %}
         <span class="tag">{{ tag }}</span>
     {% endfor %}
+
+    <form action="" method="post" id="read-later">
+        {% csrf_token %}
+        <button>Read Later</button>
+    </form>
+
     <article>
         <img src="{{ post.image.url }}" alt="{{ post.title|title }}">
         <address>
@@ -38,16 +44,19 @@
     <p>{{ post.content|linebreaks }}</p>
 </main>
 
+
+{% if comments %}
 <section id="comments">
     <ul>
         {% for comment in comments %}
-            <li>
-                <h2>{{ comment.user_name }}</h2>
-                <p>{{ comment.text|linebreaks }}</p>
-            </li>
+        <li>
+            <h2>{{ comment.user_name }}</h2>
+            <p>{{ comment.text|linebreaks }}</p>
+        </li>
         {% endfor %}
     </ul>
 </section>
+{% endif %}
 
 <section id="comment-form">
     <h2>Your Comment</h2>
