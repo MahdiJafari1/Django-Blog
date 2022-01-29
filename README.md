@@ -1,3 +1,4 @@
 #Django Blog
 
-**This repository contains the project of Maximillian Schuwazmuller Django course that is a blog with django.**
+A simple blog with the purpose of learning django concepts.
+This project is from Maximillian Schwarzmuller's Django course.
